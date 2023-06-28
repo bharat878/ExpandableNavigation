@@ -10,14 +10,12 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.coroutines.NonDisposableHandle.parent
-
 
 class ExpandableListAdapter(
     private val mContext: Context,
     private val mListDataHeader: List<ExpandedMenuModel>,
     private val mListDataChild: HashMap<ExpandedMenuModel, List<String>>,
-    var expandList: ExpandableListView
+    private val expandableListView: ExpandableListView
 ) : BaseExpandableListAdapter() {
 
     override fun getGroupCount(): Int {
@@ -31,7 +29,8 @@ class ExpandableListAdapter(
         if (p0 != 2) {
             childCount = mListDataChild[mListDataHeader[p0]]?.size!!
         }
-        return childCount    }
+        return childCount
+    }
 
     override fun getGroup(p0: Int): Any {
         return this.mListDataHeader[p0]
@@ -54,14 +53,14 @@ class ExpandableListAdapter(
         return false
     }
 
-    override fun getGroupView(groupPosition: Int, p1: Boolean, convertView: View?, p3: ViewGroup?): View {
+    override fun getGroupView(
+        groupPosition: Int,
+        p1: Boolean,
+        convertView: View?,
+        p3: ViewGroup?
+    ): View {
         val headerTitle = getGroup(groupPosition) as ExpandedMenuModel
         val view = convertView ?: LayoutInflater.from(mContext).inflate(R.layout.listheader, null)
-//        if (convertView == null) {
-//            val infalInflater = mContext
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//            view = infalInflater.inflate(R.layout.listheader, null)
-//        }
 
         val lblListHeader = view?.findViewById<TextView>(R.id.submenu)
         lblListHeader?.setTypeface(null, Typeface.BOLD)
@@ -70,18 +69,17 @@ class ExpandableListAdapter(
         return view!!
     }
 
-    override fun getChildView(groupPosition: Int, childPosition: Int, p2: Boolean, convertView: View?, p4: ViewGroup?): View {
+    override fun getChildView(
+        groupPosition: Int,
+        childPosition: Int,
+        p2: Boolean,
+        convertView: View?,
+        p4: ViewGroup?
+    ): View {
         val childText = getChild(groupPosition, childPosition) as String
-
         val view = convertView ?: LayoutInflater.from(mContext).inflate(R.layout.list_submenu, null)
-//        if (convertView == null) {
-//            val infalInflater = mContext
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//            view = infalInflater.inflate(R.layout.list_submenu, null)
-//        }
 
         view?.findViewById<TextView>(R.id.submenu)?.text = childText
-
         return view!!
     }
 

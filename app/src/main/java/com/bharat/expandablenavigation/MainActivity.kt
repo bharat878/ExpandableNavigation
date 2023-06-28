@@ -1,14 +1,12 @@
 package com.bharat.expandablenavigation
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ExpandableListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.navigation.NavigationView
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,41 +24,46 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        drawerLayout = findViewById(R.id.my_drawer_layout)
-        toolbar = findViewById(R.id.topAppBar)
-        var navigationView = findViewById<NavigationView>(R.id.navigationView)
-
-        toolbar.setNavigationOnClickListener {
-            drawerLayout.open()
-        }
-
-
-        navigationView.setNavigationItemSelectedListener {
-
-            when(it.itemId) {
-                R.id.nav_logout -> viewModel.setToolBarText("hello")
-            }
-
-            it.isChecked = true
-            drawerLayout.close()
-            true
-        }
-
+        initUI()
         observeData()
-
-
-        expandableList = findViewById(R.id.expandableListView)
-
         prepareList()
+        onClick()
         mMenuAdapter = ExpandableListAdapter(
             this,
             listDataHeader, listDataChild!!, expandableList
         )
         expandableList.setAdapter(mMenuAdapter)
+    }
 
-        expandableList.setOnChildClickListener { p0, p1, p2, p3, p4 -> false }
-        expandableList.setOnGroupClickListener { p0, p1, p2, p3 -> false }
 
+    private fun initUI() {
+        drawerLayout = findViewById(R.id.my_drawer_layout)
+        toolbar = findViewById(R.id.topAppBar)
+        expandableList = findViewById(R.id.expandableListView)
+    }
+
+    private fun onClick() {
+        toolbar.setNavigationOnClickListener {
+            drawerLayout.open()
+        }
+
+        expandableList.setOnGroupClickListener { expandableListView, view, groupPosition, p3 ->
+            val hasChildPositions =
+                expandableListView!!.expandableListAdapter.getChildrenCount(groupPosition) > 0
+
+            if (!hasChildPositions) {
+                val groupText =
+                    expandableListView.expandableListAdapter.getGroup(groupPosition) as ExpandedMenuModel
+                viewModel.setToolBarText(groupText.iconName)
+            }
+            false
+        }
+
+        expandableList.setOnChildClickListener { expandableListView, view, p2, p3, p4 ->
+            val childText = expandableListView?.expandableListAdapter?.getChild(p2, p3)
+            viewModel.setToolBarText(childText.toString())
+            false
+        }
     }
 
     private fun prepareList() {
@@ -95,7 +98,8 @@ class MainActivity : AppCompatActivity() {
         heading2.add("Submenu of item 2")
         heading2.add("Submenu of item 2")
 
-        listDataChild!![(listDataHeader as ArrayList<ExpandedMenuModel>)[0]] = heading1 // Header, Child data
+        listDataChild!![(listDataHeader as ArrayList<ExpandedMenuModel>)[0]] =
+            heading1 // Header, Child data
 
         listDataChild!![(listDataHeader as ArrayList<ExpandedMenuModel>)[1]] = heading2
     }
@@ -103,6 +107,8 @@ class MainActivity : AppCompatActivity() {
     private fun observeData() {
         viewModel.toolbarText.observe(this) {
             toolbar.title = it
+
+            drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
 

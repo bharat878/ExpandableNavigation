@@ -26,7 +26,7 @@ class ExpandableListAdapter(
 
     override fun getChildrenCount(p0: Int): Int {
         var childCount = 0
-        if (p0 != 2) {
+        if (p0 < 2) {
             childCount = mListDataChild[mListDataHeader[p0]]?.size!!
         }
         return childCount

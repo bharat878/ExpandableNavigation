@@ -27,7 +27,7 @@
                 app:navigationIcon="@drawable/baseline_menu_24"
                 style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
                 android:background="@android:color/transparent"
-                android:elevation="0dp" />
+                android:elevation="@dimen/dim_0" />
         </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -43,7 +43,7 @@
             android:id="@+id/expandableListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"/>
+            android:layout_marginTop="@dimen/dim_180"/>
 
     </com.google.android.material.navigation.NavigationView>
 

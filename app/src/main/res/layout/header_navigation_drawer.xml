@@ -1,22 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="@dimen/dim_160"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
     >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nav_close"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:textSize="24sp"
+        android:text="@string/name"
+        android:layout_marginTop="@dimen/dim_32"
+        android:layout_marginStart="@dimen/dim_16"
+        android:textSize="@dimen/text_size_24"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:layout_marginTop="@dimen/dim_16"
+        android:layout_marginStart="@dimen/dim_16"
+        android:textSize="@dimen/text_size_18"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

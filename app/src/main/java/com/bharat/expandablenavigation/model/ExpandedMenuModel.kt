@@ -1,4 +1,4 @@
-package com.bharat.expandablenavigation
+package com.bharat.expandablenavigation.model
 
 data class ExpandedMenuModel(
     var iconName: String = "",

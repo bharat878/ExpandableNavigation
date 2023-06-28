@@ -1,4 +1,4 @@
-package com.bharat.expandablenavigation
+package com.bharat.expandablenavigation.ui
 
 import android.os.Bundle
 import android.widget.ExpandableListView
@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
+import com.bharat.expandablenavigation.model.ExpandedMenuModel
+import com.bharat.expandablenavigation.viewmodel.MainViewModel
+import com.bharat.expandablenavigation.R
 import com.bharat.expandablenavigation.utils.Utils
 import com.google.android.material.appbar.MaterialToolbar
 
@@ -29,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         observeData()
         onClick()
 
+        expandableList.setGroupIndicator(resources.getDrawable(R.drawable.selector));
+
         mMenuAdapter = ExpandableListAdapter(
             this,
             listDataHeader, listDataChild!!, expandableList
@@ -44,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         listDataHeader = ArrayList()
         listDataChild = HashMap()
 
-        listDataHeader = Utils.getGroupList()
+        listDataHeader = Utils.getGroupList(R.drawable.selector)
         listDataChild = Utils.getChildList(listDataHeader)
     }
 

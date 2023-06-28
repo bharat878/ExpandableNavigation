@@ -1,4 +1,4 @@
-package com.bharat.expandablenavigation
+package com.bharat.expandablenavigation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

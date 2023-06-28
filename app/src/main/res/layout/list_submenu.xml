@@ -8,8 +8,8 @@
         android:id="@+id/submenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dim_20"
+        android:layout_marginStart="@dimen/dim_70"
         android:padding="@dimen/dim_10"
-        android:textColor="#000000"
+        android:textColor="@color/black_text"
         android:textSize="@dimen/text_size_18"/>
 </LinearLayout>

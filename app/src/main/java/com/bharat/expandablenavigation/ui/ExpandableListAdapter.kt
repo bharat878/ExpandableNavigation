@@ -1,4 +1,4 @@
-package com.bharat.expandablenavigation
+package com.bharat.expandablenavigation.ui
 
 import android.content.Context
 import android.graphics.Typeface
@@ -10,6 +10,8 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
+import com.bharat.expandablenavigation.R
+import com.bharat.expandablenavigation.model.ExpandedMenuModel
 
 class ExpandableListAdapter(
     private val mContext: Context,
@@ -60,7 +62,15 @@ class ExpandableListAdapter(
         p3: ViewGroup?
     ): View {
         val headerTitle = getGroup(groupPosition) as ExpandedMenuModel
+
         val view = convertView ?: LayoutInflater.from(mContext).inflate(R.layout.listheader, null)
+        expandableListView.setGroupIndicator(null)
+
+        var indicator = view.findViewById<ImageView>(R.id.iconimage)
+        if (getChildrenCount(groupPosition) > 0)
+            indicator.visibility = View.VISIBLE
+        else
+            indicator.visibility = View.INVISIBLE
 
         val lblListHeader = view?.findViewById<TextView>(R.id.submenu)
         lblListHeader?.setTypeface(null, Typeface.BOLD)

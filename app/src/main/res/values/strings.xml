@@ -4,4 +4,11 @@
     <string name="nav_close">Navigation Open</string>
     <string name="name">Bharat Kumar</string>
     <string name="email">kumarbharat878@gmail.com</string>
+    <string name="profile">User is on profile screen</string>
+    <string name="card_payment">User is on card payment screen</string>
+    <string name="upi_payment">User is on UPI payment screen</string>
+    <string name="net_banking">User is on Net Banking screen</string>
+    <string name="referral">User is on referral screen</string>
+    <string name="help">User is on Help screen</string>
+    <string name="logout">User is on Logout screen</string>
 </resources>

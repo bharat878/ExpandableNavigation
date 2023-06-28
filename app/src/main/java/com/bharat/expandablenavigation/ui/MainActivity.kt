@@ -3,6 +3,7 @@ package com.bharat.expandablenavigation.ui
 import android.os.Bundle
 import android.widget.ExpandableListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         observeData()
         onClick()
 
-        expandableList.setGroupIndicator(resources.getDrawable(R.drawable.selector));
+        expandableList.setGroupIndicator(ContextCompat.getDrawable(this,R.drawable.selector))
 
         mMenuAdapter = ExpandableListAdapter(
             this,

@@ -21,8 +21,6 @@ class ExpandableListAdapter(
 ) : BaseExpandableListAdapter() {
 
     override fun getGroupCount(): Int {
-        val i = mListDataHeader.size
-        Log.d("GROUPCOUNT", i.toString())
         return mListDataHeader.size
     }
 
@@ -39,7 +37,6 @@ class ExpandableListAdapter(
     }
 
     override fun getChild(p0: Int, p1: Int): Any {
-        Log.d("CHILD", mListDataChild[this.mListDataHeader[p0]]?.get(p1).toString())
         return this.mListDataChild[this.mListDataHeader[p0]]?.get(p1)!!
     }
 
